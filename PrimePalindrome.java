@@ -1,40 +1,47 @@
+
 import java.util.Scanner;
 
 public class PrimePalindrome {
-    public static boolean isPrime(int num) {
-        if (num <= 1) return false;
-        for (int i = 2; i * i <= num; i++) 
-            if (num % i == 0) return false;
-        return true;
-    }
-    public static boolean isPalindrome(int num) {
-        int original = num;
-        int reversed = 0;
 
-        while (num > 0) {
-            int digit = num % 10;
-            reversed = (reversed * 10) + digit;
-            num /= 10;
+    static boolean isPrime(int n) {
+
+        if (n < 2)
+            return false;
+
+        for (int i = 2; i <= Math.sqrt(n); i++) {
+            if (n % i == 0)
+                return false;
         }
 
-        return original == reversed;
+        return true;
+    }
+
+    static boolean isPalindrome(int n) {
+
+        int rev = 0;
+        int temp = n;
+
+        while (temp > 0) {
+            rev = rev * 10 + temp % 10;
+            temp /= 10;
+        }
+
+        return rev == n;
     }
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-		int number,t;
-		System.out.print("Enter no of test cases: ");
-        t = scanner.nextInt();
-		while(t--!=0){
-        System.out.print("Enter a number: ");
-        number = scanner.nextInt();
 
-        if (isPrime(number) && isPalindrome(number)) {
-            System.out.println(number + " is a Prime Palindrome.");
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter a number: ");
+        int n = sc.nextInt();
+
+        if (isPrime(n) && isPalindrome(n)) {
+            System.out.println(n + " is a Prime Palindrome.");
         } else {
-            System.out.println(number + " is NOT a Prime Palindrome.");
+            System.out.println(n + " is NOT a Prime Palindrome.");
         }
-		}
-        scanner.close();
+
+        sc.close();
     }
 }
